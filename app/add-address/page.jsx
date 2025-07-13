@@ -4,9 +4,12 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import Image from "next/image";
 import { useState } from "react";
-
+import toast from "react-hot-toast";
+import { useAppContext } from "@/context/AppContext";
+import axios from "axios";
+import { Router } from "next/router";
 const AddAddress = () => {
-
+   const {getToken,router}=useAppContext();
     const [address, setAddress] = useState({
         fullName: '',
         phoneNumber: '',
@@ -17,7 +20,19 @@ const AddAddress = () => {
     })
 
     const onSubmitHandler = async (e) => {
-        e.preventDefault();
+       e.preventDefault();
+       try{
+        const token=await getToken();
+const {data}=await axios.post('api/user/add-address',{address},{headers:{Authorizatoin:`Bearer ${token}`}});
+console.log("dataf form add adress->,",data);
+if(data.success){
+    toast.success(data.message);
+  router.push('/cart');
+}
+       }catch(err){
+        console.log("erro->",err);
+        toast.error(err.message);
+       }
 
     }
 

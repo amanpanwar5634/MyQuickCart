@@ -6,5 +6,6 @@ const userSchema=new mongoose.Schema({
     imageUrl:{type:String,required:true},
     cartItems:{type:Object,default:{}},
 },{minimize:false})
-const User=mongoose.model("user",userSchema)||mongoose.model.user;
+const User = mongoose.models.user || mongoose.model("user", userSchema);
+
 export default User;
