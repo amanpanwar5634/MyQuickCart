@@ -11,6 +11,7 @@ export async function POST(request){
       if(!address || items.length==0){
         return NextResponse.json({success:false,message:'Invalid Data'});
       }
+      console.log("items form order->",items);
       const amount=await items.reduce(async(acc,item)=>{
          const product=await Product.findById(item.product);
          return await acc+product.offerPrice*item.quantity;
@@ -26,9 +27,7 @@ export async function POST(request){
       //clear  user cart
       const user=await User.findById(userId);
       user.cartItems={};
-      await user.save();
-      const orders=await Order.find({});
-      console.log("orders->",orders);
+      await user.save()
       return NextResponse.json({success:true,message:"order placed"});
     }catch(err){
         return NextResponse.json({success:false,message:err.message});

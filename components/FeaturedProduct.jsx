@@ -1,7 +1,7 @@
 import React from "react";
 import { assets } from "@/assets/assets";
 import Image from "next/image";
-
+import { motion } from 'framer-motion';
 const products = [
   {
     id: 1,
@@ -25,13 +25,26 @@ const products = [
 
 const FeaturedProduct = () => {
   return (
-    <div className="mt-14">
-      <div className="flex flex-col items-center">
-        <p className="text-3xl font-medium">Featured Products</p>
-        <div className="w-28 h-0.5 bg-orange-600 mt-2"></div>
-      </div>
+    <div className="mt-14 px-6">
+    <motion.div
+  initial={{ opacity: 0, y: -20 }}
+  animate={{ opacity: 1, y: 0 }}
+  transition={{ duration: 0.6 }}
+  className="text-3xl md:text-4xl font-semibold text-gray-800 mb-2 w-full text-left"
+>
+  Feature Products
+</motion.div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-14 mt-12 md:px-14 px-4">
+<motion.div
+  initial={{ width: "1%" }}
+  animate={{ width: "30%" }}
+  transition={{ duration: 1, ease: "easeInOut" }}
+  className="h-1 bg-orange-500 rounded-full mb-5 mr-auto"
+/>
+
+
+
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 lg:gap-14 mt-12 md:px-14 px-4">
         {products.map(({ id, image, title, description }) => (
           <div key={id} className="relative group">
             <Image

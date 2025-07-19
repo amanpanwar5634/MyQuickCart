@@ -25,7 +25,7 @@ export const AppContextProvider = (props) => {
     const fetchProductData = async () => {
        try{console.log("inside the fetchProduct Data");
         const {data}=await axios.get('/api/product/list');
-        console.log("data form fetchProductDat",data);
+        
         if(data.success){setProducts(data.products)}
         else{toast.error(data.message)}
        }catch(err){
@@ -37,9 +37,9 @@ export const AppContextProvider = (props) => {
         try{
             if(user.publicMetadata.role=="seller"){ setIsSeller(true);}
             const token=await getToken();
-            console.log("token form fetchUSERdATA->",token);
+         
             const {data}=await axios.get('/api/user/data',{headers:{Authorization:`Bearer ${token}`}});
-            console.log("data from user->",data);
+            
             if(data.success){
              setUserData(data.user);
              setCartItems(data.user.cartItems);
@@ -105,16 +105,18 @@ export const AppContextProvider = (props) => {
         return totalCount;
     }
 
-    const getCartAmount = () => {
-        let totalAmount = 0;
-        for (const items in cartItems) {
-            let itemInfo = products.find((product) => product._id === items);
-            if (cartItems[items] > 0) {
-                totalAmount += itemInfo.offerPrice * cartItems[items];
-            }
+  const getCartAmount = () => {
+    let totalAmount = 0;
+    for (const items in cartItems) {
+        const itemInfo = products.find((product) => product._id === items);
+        
+        if (itemInfo && cartItems[items] > 0) {
+            totalAmount += itemInfo.offerPrice * cartItems[items];
         }
-        return Math.floor(totalAmount * 100) / 100;
     }
+    return parseFloat(totalAmount.toFixed(2));
+};
+
 
     useEffect(() => {
         fetchProductData()
