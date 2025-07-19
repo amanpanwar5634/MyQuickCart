@@ -1,4 +1,6 @@
- # 🛒 MyQuickCart
+# 🛒 MyQuickCart
+
+🔗 **GitHub Repository:** [MyQuickCart on GitHub](https://github.com/amanpanwar5634/MyQuickCart)
 
 **MyQuickCart** is a fully-featured and responsive e-commerce platform built with **Next.js**, **MongoDB**, **Express**, and **Node.js**.  
 It offers seamless shopping experiences, robust admin management, and secure authentication using **Clerk**. Enhanced with **Inngest** to handle background tasks and workflows efficiently.
@@ -79,4 +81,9 @@ Built with **Tailwind CSS**, the entire platform is optimized for mobile, tablet
 
 ---
 
- 
+## 🚀 Getting Started
+
+### 1. Clone the Repository
+```bash
+git clone https://github.com/amanpanwar5634/MyQuickCart.git
+cd myquickcart
